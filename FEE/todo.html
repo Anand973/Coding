@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Simple To-Do App</title>
+
+  <style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+
+    .container {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      padding: 20px;
+
+    }
+
+
+
+    .left-pane {
+
+      flex: 1;
+
+      padding: 20px;
+
+      border: 1px solid #ccc;
+
+    }
+
+
+
+    .right-pane {
+
+      flex: 1;
+
+      padding: 20px;
+
+      border: 1px solid #ccc;
+
+    }
+
+
+
+    ul {
+
+      list-style-type: none;
+
+      padding: 0;
+
+    }
+
+
+
+    li {
+
+      margin-bottom: 10px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+    }
+
+
+
+    .delete-btn {
+
+      cursor: pointer;
+
+      color: red;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="left-pane">
+
+      <h2>Task List</h2>
+
+      <ul id="task-list">
+
+        <!-- Tasks will be added here dynamically -->
+
+      </ul>
+
+    </div>
+
+    <div class="right-pane">
+
+      <h2>Add a Task</h2>
+
+      <form id="task-form">
+
+        <input type="text" id="task-input" placeholder="Enter a task" required>
+
+        <button type="submit">Add Task</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <script>
+
+    // Get references to DOM elements
+
+    const taskList = document.getElementById("task-list");
+
+    const taskForm = document.getElementById("task-form");
+
+    const taskInput = document.getElementById("task-input");
+
+
+
+    // Function to add a new task to the list
+
+    function addTask(taskText) {
+
+      const li = document.createElement("li");
+
+      li.innerHTML = `
+
+        <span>${taskText}</span>
+
+        <span class="delete-btn">&#10006;</span>
+
+      `;
+
+      taskList.appendChild(li);
+
+
+
+      // Add click event listener to the delete button
+
+      li.querySelector(".delete-btn").addEventListener("click", () => {
+
+        taskList.removeChild(li);
+
+      });
+
+    }
+
+
+
+    // Submit form to add a new task
+
+    taskForm.addEventListener("submit", (e) => {
+
+      e.preventDefault();
+
+      const taskText = taskInput.value.trim();
+
+      if (taskText !== "") {
+
+        addTask(taskText);
+
+        taskInput.value = "";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
+
